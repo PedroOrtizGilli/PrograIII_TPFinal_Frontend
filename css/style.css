@@ -1,0 +1,168 @@
+/* --- Estilos del Panel de Admin --- */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0; 
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.admin-container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* --- ESTILOS NAVBAR ACTUALIZADOS --- */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between; /* Esto separa el H1 del NAV */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: left;
+    flex-shrink: 0; /* Evita que el H1 se encoja */
+}
+
+.navbar nav {
+    flex-grow: 1; /* Hace que el <nav> ocupe el espacio restante */
+    margin-left: 40px; /* Separación del H1 */
+}
+
+.navbar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between; /* ESTA ES LA CLAVE: separa los li */
+    width: 100%;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px; /* Añade área de click */
+}
+
+.navbar nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* --- NUEVOS ESTILOS PARA LAS TARJETAS DE PRODUCTO --- */
+
+.product-grid {
+    display: grid;
+    /* Crea columnas automáticas: 
+      - Mínimo 250px de ancho.
+      - Máximo 1fr (ocupa el espacio disponible).
+      - Rellena automáticamente.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* Para que la imagen no se salga de los bordes redondeados */
+    display: flex;
+    flex-direction: column; /* Apila imagen, info y botones */
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Altura fija para la imagen */
+    object-fit: cover; /* Escala la imagen para que cubra el espacio sin deformarse */
+}
+
+.product-card .product-info {
+    padding: 15px;
+    flex-grow: 1; /* Empuja los botones hacia abajo */
+}
+
+.product-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.product-card p {
+    margin: 4px 0;
+    color: #555;
+}
+
+.product-card .product-precio {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+.product-card .product-actions {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px; /* Espacio entre botones */
+}
+
+/* Reutilizamos los botones que ya tenías */
+.edit-button, .delete-button {
+    flex-grow: 1; /* Hace que ambos botones ocupen 50% */
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.edit-button {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* --- Estilos de la tabla (Se mantienen por si los usas en otras páginas) --- */
+.list-section {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+}
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.product-table th,
+.product-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    vertical-align: middle;
+}
+.product-table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: #444;
+}
