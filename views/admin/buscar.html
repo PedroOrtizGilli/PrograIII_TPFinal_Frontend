@@ -84,7 +84,10 @@
                     let htmlProducto = `
                         <li class="li-listados">
                             <img src="${producto.imagen}" alt="${producto.nombre}" style="width:100px; height:100px; object-fit:cover;">
-                            <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: ${producto.precio}</strong></p>
+                            <p>ID: ${producto.id}</p>
+                            <h3>${producto.nombreProducto}</h3>
+                            <p>Precio: $${producto.precio}</p>
+                            <p>Descripción: ${producto.tipo}</p> 
                         </li>
                     `;
                     listaProductos.innerHTML = htmlProducto;
