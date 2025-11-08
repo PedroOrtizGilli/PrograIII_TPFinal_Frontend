@@ -70,8 +70,8 @@
                 let respuesta = await fetch(`${url}/${idProd}`);
                 let datos = await respuesta.json();
 
-                console.log(datos); // {payload: {…}, message: '...'}
-                console.log(datos.payload); // {id: 1, nombre: '...'}
+                console.log(datos); 
+                console.log(datos.payload); 
 
                 // Quitamos el [0] porque nuestro backend devuelve 
                 // el objeto directamente (o 'null' si no lo encuentra).
