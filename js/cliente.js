@@ -17,8 +17,11 @@ if (window.location.pathname.endsWith('indexCliente.html')) {
 
 //funcionalidad de autoservice.html
 if (window.location.pathname.endsWith('autoservice.html')) {
+    //Variables que vamos a usar
     const productContainer = document.getElementById('contenedor-productos');
     const nombre = localStorage.getItem('nombreUsuario');
+    const btnCarrito = document.getElementById('btn-carrito');
+
     //Muestro el nombre del cliente
     if (nombre) {
         const saludo = document.getElementById('saludo');
@@ -31,54 +34,47 @@ if (window.location.pathname.endsWith('autoservice.html')) {
     } 
 
     if (productContainer) {
-        fetchYMostrarProductos();
+        fetchFunction();
     } else {
         console.log("Nota: No se encontró 'contenedor-productos' en esta página.");
     }
 
-    //Muestro los productos disponibles
-        async function fetchYMostrarProductos() {
+    //Redirigir al carrito
+    btnCarrito.addEventListener('click', () => {
+        window.location.href = './carrito.html';
+    });
+
+     //Cargar productos desde la API
+    async function fetchFunction() {
         try {
-            // Pedimos los productos a la API (ruta corregida)
             const response = await fetch('http://localhost:3000/products');
             if (!response.ok) throw new Error('Error al obtener productos');
             
             const data = await response.json();
-            const productos = data.payload;
-
-            // Limpiamos el contenedor
-            productContainer.innerHTML = '';
-
-            // Recorremos los productos y creamos una TARJETA por cada uno
-            productos.forEach(producto => {
-                
-                // Creamos un nuevo div para la tarjeta
-                const card = document.createElement('div');
-                card.className = 'product-card'; // Le asignamos su clase CSS
-               
-                // Usamos una imagen "placeholder" si el producto no tiene una
-                const urlDeImagen = producto.imagen || 'https://via.placeholder.com/250x200.png?text=Sin+Imagen'; 
-                const nombreProducto = producto.nombreProducto;
-
-                // Construimos el HTML interno de la tarjeta
-                card.innerHTML = `
-                    <img src="${urlDeImagen}" alt="${nombreProducto}">
-                    <div class="product-info">
-                        <h3>${nombreProducto}</h3>
-                        <p class="product-tipo">${producto.tipo || 'N/A'}</p>
-                        <p class="product-precio">$${producto.precio}</p>
-                        <p class="product-stock">${producto.stock || 0} disponibles</p>
-                    </div>
-                `;
-
-                // Añadimos la tarjeta completa al contenedor
-                productContainer.appendChild(card);
-            });
-
+            todosLosProductos = data.payload;
+            mostrarProductos(todosLosProductos);
         } catch (error) {
             console.error(error);
-            // Mensaje de error simple si algo falla
             productContainer.innerHTML = `<p class="error-message">Error al cargar productos.</p>`;
         }
+    }
+
+    function mostrarProductos(lista) {
+        productContainer.innerHTML = '';
+        lista.forEach(producto => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            const urlDeImagen = producto.imagen || 'https://via.placeholder.com/250x200.png?text=Sin+Imagen'; 
+            card.innerHTML = `
+                <img src="${urlDeImagen}" alt="${producto.nombreProducto}">
+                <div class="product-info">
+                    <h3>${producto.nombreProducto}</h3>
+                    <p class="product-tipo">${producto.tipo || 'N/A'}</p>
+                    <p class="product-precio">$${producto.precio}</p>
+                    <p class="product-stock">${producto.stock || 0} disponibles</p>
+                </div>
+            `;
+            productContainer.appendChild(card);
+        });
     }
 }
