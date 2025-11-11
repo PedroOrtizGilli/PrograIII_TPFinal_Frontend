@@ -11,7 +11,7 @@ function inyectarLogoAdmin() {
     if (headerElement && h1Element) {
         
         const logoImg = `
-            <img src="https://image.pngaaa.com/392/5315392-middle.png" 
+            <img src="https://image.pngaaa.com/207/5123207-middle.png" 
                  alt="Logo Admin" 
                  class="admin-logo-img"> 
         `;
