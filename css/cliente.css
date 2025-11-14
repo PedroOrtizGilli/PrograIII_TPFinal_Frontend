@@ -79,6 +79,10 @@ header {
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
 }
 
 #saludo {
@@ -86,13 +90,79 @@ header {
     font-weight: 500;
 }
 
-/* ===== CONTENEDOR DE PRODUCTOS ===== */
+/* ===== MAIN ===== */
 main {
     flex: 1;
     padding: 40px;
 }
 
+/* ===== NAV DE AUTOSERVICCE ===== */
+#nav-bar {
+    position: sticky;
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between; /* menú izq, carrito der */
+    align-items: center;
+    margin-top: -15px;
+    z-index: 100;
+}
+
+#nav-bar ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-bar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+#nav-bar a:hover {
+    color: #f6e100;
+}
+
+/* Ícono del carrito */
+#btn-carrito {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+#btn-carrito:hover .icono-carrito {
+    transform: scale(1.1);
+}
+
+#btn-carrito:hover #contador-carrito {
+    transform: scale(1.1);
+}
+
+.icono-carrito {
+    width: 32px;
+    height: 32px;
+    filter: invert(100%); /* lo hace blanco sobre fondo negro */
+    transition: transform 0.2s ease;
+}
+
+#contador-carrito {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+
+/* ===== CONTENEDOR DE PRODUCTOS ===== */
+
 .product-grid {
+    padding: 40px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 25px;
@@ -148,7 +218,7 @@ main {
     margin-top: 10px;
 }
 
-.boton-comprar{
+.btn-comprar{
     background-color: #f6e100;
     color: rgb(0, 0, 0);
     border: none;
@@ -161,18 +231,77 @@ main {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* ===== FOOTER (opcional) ===== */
+.btn-comprar:hover {
+    transform: scale(1.05);
+}
+
+/* ===== CARRITO ===== */
+.contenedor-carrito {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+#contenedor-productos {
+    width: 65%;
+}
+
+.item-carrito {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 100px;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.item-carrito img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.resumen {
+    width: 30%;
+    position: sticky;
+    text-align: center;
+    top: 20px; /* Distancia desde el borde superior */
+    height: 350px; /* Tamaño fijo */
+    overflow-y: auto; /* Si el contenido creciera */
+    border: 1px solid #ccc;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#btn-checkout {
+    background-color: #f6e100;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* ===== FOOTER ===== */
 footer {
-    background-color: #007bff;
+    background-color: #000000;
     color: white;
     text-align: center;
     padding: 15px;
     font-size: 0.9rem;
+    margin-top: auto;
 }
 
 /* ===== MENSAJE DE ERROR ===== */
 .error-message {
-    color: red;
+    color: rgb(233, 98, 98);
     text-align: center;
     font-weight: bold;
     margin-top: 30px;
