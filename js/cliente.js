@@ -2,6 +2,7 @@
 if (window.location.pathname.endsWith('indexCliente.html')) {
     //Reseteo el nombre del cliente
     localStorage.removeItem('nombreUsuario');
+    localStorage.removeItem('carrito');
 
     const form = document.getElementById('formNombre');
     //Recibo y envio la informacion del cliente
@@ -9,8 +10,10 @@ if (window.location.pathname.endsWith('indexCliente.html')) {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             const nombreUsuario = document.getElementById('fnombre').value;
-            localStorage.setItem('nombreUsuario', nombreUsuario);
-            window.location.href = './views/cliente/autoservice.html';
+            if(nombreUsuario.length > 0){
+                localStorage.setItem('nombreUsuario', nombreUsuario);
+                window.location.href = './views/cliente/autoservice.html';
+            }
         });
     }
 }
@@ -24,6 +27,7 @@ if (window.location.pathname.endsWith('autoservice.html')) {
     const filtroNav = document.getElementById('filtro-nav');
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     let todosLosProductos = []
+
 
     //Muestro el nombre del cliente
     if (nombre) {
@@ -145,8 +149,20 @@ if(window.location.pathname.endsWith('carrito.html')){
     const envioSpan = document.getElementById('envio');
     const impuestosSpan = document.getElementById('impuestos');
     const totalSpan = document.getElementById('total');
-
+    const botonSeguriComprando = document.getElementById('btn-seguirComprando')
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const botonComprar = document.getElementById('btn-checkout');
+
+    botonSeguriComprando.addEventListener("click", () => {
+        window.location.href = "./autoservice.html";
+    })
+
+    botonComprar.addEventListener("click", () => {
+        if(carrito.length > 0){
+            window.location.href = "./ticket.html";
+        }
+    })
+
 
     mostrarCarrito();
     actualizarTotales();
@@ -236,4 +252,14 @@ if(window.location.pathname.endsWith('carrito.html')){
         impuestosSpan.textContent = `$${impuestos.toFixed(2)}`;
         totalSpan.textContent = `$${total.toFixed(2)}`;
     }
+}
+
+if (window.location.pathname.endsWith("ticket.html")){
+    const nombre = localStorage.getItem('nombreUsuario');
+    let carrito = JSON.parse(localStorage.getItem('carrito'));
+    const contenedorticket = document.getElementById('contenedor-ticket');
+
+    
+
+
 }
