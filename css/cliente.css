@@ -72,7 +72,7 @@ input[type="submit"]:hover {
     transform: scale(1.05);
 }
 
-/* ===== HEADER DE AUTOSERVICE ===== */
+/* ===== HEADER ===== */
 header {
     background-color: #f6e100;
     color: white;
@@ -276,7 +276,7 @@ main {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-#btn-checkout, #btn-seguirComprando {
+#btn-checkout, #btn-seguirComprando, .btn-eliminar {
     background-color: #f6e100;
     color: rgb(0, 0, 0);
     border: none;
@@ -305,4 +305,140 @@ footer {
     text-align: center;
     font-weight: bold;
     margin-top: 30px;
+}
+
+/* ===== MEDIA QUERY ===== */
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+
+    * {
+        font-size: 25px;
+    }
+
+    header {
+        height: 100px;
+    }
+
+    /* NAV horizontal */
+    #nav-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    #nav-bar ul {
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 20px;
+    }
+
+    /* MAIN */
+    main {
+        padding: 20px;
+    }
+
+    /* GRID PRODUCTOS → 1 COLUMNA */
+    .product-grid {
+        padding: 20px;
+        grid-template-columns: 1fr !important;
+    }
+
+    /* CARRITO → UNA SOLA COLUMNA */
+    .contenedor-carrito {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    #contenedor-productos {
+        width: 100%;
+    }
+
+    .item-carrito {
+        display: grid;
+        grid-template-columns: auto 1fr; /* imagen + info */
+        grid-template-rows: auto auto;   /* info + botón */
+        column-gap: 15px;
+        row-gap: 10px;
+        align-items: start;
+    }
+
+    .item-carrito img {
+        grid-column: 1 / 2; /* imagen arriba a la izquierda */
+        grid-row: 1 / 2;
+    }
+
+    .item-carrito .info {
+        grid-column: 2 / 3; /* info arriba a la derecha */
+        grid-row: 1 / 2;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .item-carrito .btn-eliminar {
+        grid-column: 2 / 3; /* botón ocupa toda la fila de abajo */
+        grid-row: 2 / 3;
+        width: fit-content;
+    }
+
+    /* ASIDE BAJA Y OCUPA TODO EL ANCHO */
+    .resumen {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    footer {
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+}
+
+
+/* ===== TABLET ===== */
+@media (min-width: 601px) and (max-width: 1023px) {
+
+    * {
+        font-size: 35px;
+    }
+
+    main {
+        padding: 30px;
+    }
+
+    /* GRID PRODUCTOS → 2 COLUMNAS */
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
+    }
+
+    /* CARRITO → MISMO COMPORTAMIENTO QUE MOBILE */
+    .contenedor-carrito {
+        flex-direction: column;   /* ← ESTA ES LA CLAVE */
+        gap: 30px;
+    }
+
+    #contenedor-productos {
+        width: 100%; /* YA QUE BAJA */
+    }
+
+    /* ASIDE BAJA Y OCUPA TODO EL ANCHO */
+    .resumen {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+/* ===== PC ===== */
+@media (min-width: 1024px) {
+
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(250px, 1fr));
+    }
+
+    .contenedor-carrito {
+        gap: 20px;
+    }
 }

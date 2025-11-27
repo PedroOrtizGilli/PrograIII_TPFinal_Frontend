@@ -144,6 +144,7 @@ if (window.location.pathname.endsWith('autoservice.html')) {
 //Funcionalidad de 'carrito.html'
 if(window.location.pathname.endsWith('carrito.html')){
     //Variables
+    const nombre = localStorage.getItem('nombreUsuario');
     const contenedorCarrito = document.getElementById('contenedor-productos');
     const subtotalSpan = document.getElementById('subtotal');
     const envioSpan = document.getElementById('envio');
@@ -163,6 +164,12 @@ if(window.location.pathname.endsWith('carrito.html')){
         }
     })
 
+    if (nombre) {
+        const saludo = document.getElementById('saludo');
+        if (saludo) {
+            saludo.textContent = `Confirma que el carrito esté en orden`;
+        }
+    }
 
     mostrarCarrito();
     actualizarTotales();
