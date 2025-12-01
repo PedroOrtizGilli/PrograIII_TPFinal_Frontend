@@ -12,7 +12,27 @@
         
     </header>
     <main>
-        <div id="contenedor-ticket"></div>
+        <form action="">
+            <h2>Método de pago</h2>
+
+            <label for="tarjetaTipo"></label>
+            <select id="tarjetaTipo" required>
+                <option value="">Seleccioná una</option>
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+            </select>
+
+            <label for="tarjeta">Número de tarjeta:</label>
+            <input type="text" id="tarjeta">
+
+            <label for="vencimiento">Vencimiento:</label>
+            <input type="month" id="vencimiento">
+
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv">
+
+            <input type="submit" value="Pagar">
+        </form>
     </main>
 
     <footer>All rights reserved - Pedro Alejandro Ortiz Gilli - Matias Schirone</footer>

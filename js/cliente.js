@@ -1,8 +1,8 @@
 //Funcionalidad del indexcliente.html
 if (window.location.pathname.endsWith('indexCliente.html')) {
     //Reseteo el nombre del cliente
-    localStorage.removeItem('nombreUsuario');
-    localStorage.removeItem('carrito');
+    sessionStorage.removeItem('nombreUsuario');
+    sessionStorage.removeItem('carrito');
 
     const form = document.getElementById('formNombre');
     //Recibo y envio la informacion del cliente
@@ -11,7 +11,7 @@ if (window.location.pathname.endsWith('indexCliente.html')) {
             event.preventDefault();
             const nombreUsuario = document.getElementById('fnombre').value;
             if(nombreUsuario.length > 0){
-                localStorage.setItem('nombreUsuario', nombreUsuario);
+                sessionStorage.setItem('nombreUsuario', nombreUsuario);
                 window.location.href = './views/cliente/autoservice.html';
             }
         });
@@ -22,10 +22,10 @@ if (window.location.pathname.endsWith('indexCliente.html')) {
 if (window.location.pathname.endsWith('autoservice.html')) {
     //Variables que vamos a usar
     const productContainer = document.getElementById('contenedor-productos');
-    const nombre = localStorage.getItem('nombreUsuario');
+    const nombre = sessionStorage.getItem('nombreUsuario');
     const btnCarrito = document.getElementById('btn-carrito');
     const filtroNav = document.getElementById('filtro-nav');
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
     let todosLosProductos = []
 
 
@@ -127,13 +127,13 @@ if (window.location.pathname.endsWith('autoservice.html')) {
                 cantidad: 1
             });
         }
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        sessionStorage.setItem('carrito', JSON.stringify(carrito));
         actualizarContadorCarrito();
     }
     //Actualiza el contador de productos al lado del icono del carrito
     function actualizarContadorCarrito() {
         const contador = document.getElementById('contador-carrito');
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+        const carritoGuardado = JSON.parse(sessionStorage.getItem('carrito')) || [];
 
         let totalCantidad = carritoGuardado.reduce((acc, item) => acc + item.cantidad, 0);
 
@@ -144,14 +144,14 @@ if (window.location.pathname.endsWith('autoservice.html')) {
 //Funcionalidad de 'carrito.html'
 if(window.location.pathname.endsWith('carrito.html')){
     //Variables
-    const nombre = localStorage.getItem('nombreUsuario');
+    const nombre = sessionStorage.getItem('nombreUsuario');
     const contenedorCarrito = document.getElementById('contenedor-productos');
     const subtotalSpan = document.getElementById('subtotal');
     const envioSpan = document.getElementById('envio');
     const impuestosSpan = document.getElementById('impuestos');
     const totalSpan = document.getElementById('total');
     const botonSeguriComprando = document.getElementById('btn-seguirComprando')
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
     const botonComprar = document.getElementById('btn-checkout');
 
     botonSeguriComprando.addEventListener("click", () => {
@@ -240,9 +240,9 @@ if(window.location.pathname.endsWith('carrito.html')){
             });
         });
     }
-    //Guardo en localStorage
+    //Guardo en sessionStorage
     function guardar() {
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        sessionStorage.setItem('carrito', JSON.stringify(carrito));
         mostrarCarrito();
         actualizarTotales();
     }
@@ -262,8 +262,8 @@ if(window.location.pathname.endsWith('carrito.html')){
 }
 
 if (window.location.pathname.endsWith("ticket.html")){
-    const nombre = localStorage.getItem('nombreUsuario');
-    let carrito = JSON.parse(localStorage.getItem('carrito'));
+    const nombre = sessionStorage.getItem('nombreUsuario');
+    let carrito = JSON.parse(sessionStorage.getItem('carrito'));
     const contenedorticket = document.getElementById('contenedor-ticket');
 
     
