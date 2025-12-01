@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket</title>
+    <title>Pago</title>
     <link rel="stylesheet" href="../../css/cliente.css">
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
     <script src="../../js/cliente.js" defer></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
         
     </header>
     <main>
-        <form action="">
+        <form id="compra">
             <h2>Método de pago</h2>
 
             <label for="tarjetaTipo"></label>
@@ -23,13 +24,13 @@
             </select>
 
             <label for="tarjeta">Número de tarjeta:</label>
-            <input type="text" id="tarjeta">
+            <input type="text" id="tarjeta" required>
 
             <label for="vencimiento">Vencimiento:</label>
-            <input type="month" id="vencimiento">
+            <input type="month" id="vencimiento" required>
 
             <label for="cvv">CVV:</label>
-            <input type="password" id="cvv">
+            <input type="password" id="cvv" required>
 
             <input type="submit" value="Pagar">
         </form>

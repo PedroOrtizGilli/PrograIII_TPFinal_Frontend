@@ -258,15 +258,51 @@ if(window.location.pathname.endsWith('carrito.html')){
         envioSpan.textContent = `$${envio}`;
         impuestosSpan.textContent = `$${impuestos.toFixed(2)}`;
         totalSpan.textContent = `$${total.toFixed(2)}`;
+
+        sessionStorage.setItem('subtotalCompra', subtotal.toFixed(2));
+        sessionStorage.setItem('envioCompra', envio.toFixed(2));
+        sessionStorage.setItem('impuestosCompra', impuestos.toFixed(2));
+        sessionStorage.setItem('totalCompra', total.toFixed(2));
     }
 }
 
 if (window.location.pathname.endsWith("ticket.html")){
     const nombre = sessionStorage.getItem('nombreUsuario');
     let carrito = JSON.parse(sessionStorage.getItem('carrito'));
-    const contenedorticket = document.getElementById('contenedor-ticket');
+    const form = document.getElementById('compra');
+    const subtotalCompra = sessionStorage.getItem('subtotalCompra');
+    const envioCompra = sessionStorage.getItem('envioCompra');
+    const impuestosCompra = sessionStorage.getItem('impuestosCompra');
+    const totalCompra = sessionStorage.getItem('totalCompra');
 
-    
-
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        //Creamos el array vacio de ids
+        const idProductos = [];
+        //Creamos la instacia de jsPDF y le damos a doc todos sus metodos
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        //Margen superior de 10px
+        let y = 10;
+        doc.setFontSize(16);
+        doc.text("Ticket de Compra", 10, y);
+        y += 10;
+        doc.setFontSize(12);
+        carrito.forEach(prod => {
+            idProductos.push(prod.id);
+            doc.text(`${prod.nombreProducto} - $${prod.precio} X ${prod.cantidad}`, 20, y);
+            y += 7;
+        })
+        doc.text(`Subtotal: $${subtotalCompra}`, 10, y);
+        y += 7;
+        doc.text(`Envío: $${envioCompra}`, 10, y);
+        y += 7;
+        doc.text(`Impuestos: $${impuestosCompra}`, 10, y);
+        y += 7;
+        doc.text(`Total: $${totalCompra}`, 10, y);
+        y += 10;
+        //Imprimimos el ticket
+        doc.save("compra.pdf");
+    })
 
 }
