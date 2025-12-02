@@ -303,8 +303,42 @@ if (window.location.pathname.endsWith("ticket.html")){
         y += 10;
         //Imprimimos el ticket
         doc.save("compra.pdf");
+        registrarVenta(totalCompra, idProductos, nombre);
         volverAlInicio()
     })
+
+    async function registrarVenta(total, idProducto, nombreCliente){
+        try{
+            const fecha = new Date();
+            const fechaFormato = fecha.toISOString().slice(0, 19).replace('T', ' ');
+
+            const data = {
+                nombreUsuario: nombreCliente,
+                precioTotal: total,
+                fechaEmision: fechaFormato,
+                productos: idProducto
+            }
+
+            const response = await fetch('http://localhost:3000/api/sales', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if(response.ok){
+                console.log("Venta registrada con exito:", result);
+                sessionStorage.clear();
+            } else {
+                console.error("Error al registrar la venta:", result);
+            }
+        } catch(error){
+            console.error("Error al registrar la venta:", error);
+        }
+    }
 
     function volverAlInicio(){
         setTimeout(() => {
