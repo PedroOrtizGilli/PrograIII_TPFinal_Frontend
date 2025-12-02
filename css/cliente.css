@@ -14,6 +14,17 @@ body {
     flex-direction: column;
 }
 
+.bienvenida {
+    background-image: url(https://i.pinimg.com/1200x/49/57/2d/49572d54988584b94137832dbfad9d71.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* ===== ENCABEZADOS ===== */
 h1, h2 {
     text-align: center;
@@ -40,7 +51,7 @@ form {
     margin-top: 40px;
 }
 
-#recuadro{
+.recuadro{
     background: rgba(255, 255, 255, 0.85);
     padding: 25px 35px;
     border-radius: 12px;
@@ -48,6 +59,7 @@ form {
     backdrop-filter: blur(4px);
     width: 320px;
     margin-top: 20px;
+    justify-content: center;
 }
 
 input[type="text"] {

@@ -303,6 +303,13 @@ if (window.location.pathname.endsWith("ticket.html")){
         y += 10;
         //Imprimimos el ticket
         doc.save("compra.pdf");
+        volverAlInicio()
     })
+
+    function volverAlInicio(){
+        setTimeout(() => {
+            window.location.href = '../../indexCliente.html';
+        }, 10000);
+    }
 
 }
